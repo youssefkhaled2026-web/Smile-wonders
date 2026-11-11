@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<title>Smile Wonders Dental Care</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: teal header band, hero with a still life of jars on a sun disc, ticker band, product grid, feature trio, dentist block in sun yellow, quiet footer. Cart and menu are side drawers. Guest checkout only. */
+:root{
+  --bg:#F4F8F7; --surface:#FFFFFF; --ink:#0F2A2D; --muted:#566F73; --line:#D9E5E3;
+  --accent:#0A7F78; --on-accent:#FFFFFF; --sun:#FFC83D; --on-sun:#2B2100;
+  --tile:#E8F1EF; --hero:#D6EFEA; --danger:#B3261E; --d:1;
+  --font-display:'Bricolage Grotesque','Cairo',system-ui,sans-serif;
+  --font-body:'Cairo',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1819; --surface:#122426; --ink:#E6F2F0; --muted:#93AEB1; --line:#233A3D;
+    --accent:#2BCFC2; --on-accent:#04201E; --sun:#FFD25E; --on-sun:#2B2100;
+    --tile:#193134; --hero:#10302F; --danger:#FF8A80; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1819; --surface:#122426; --ink:#E6F2F0; --muted:#93AEB1; --line:#233A3D;
+  --accent:#2BCFC2; --on-accent:#04201E; --sun:#FFD25E; --on-sun:#2B2100;
+  --tile:#193134; --hero:#10302F; --danger:#FF8A80; color-scheme:dark;
+}
+html[dir="rtl"]{--d:-1}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+html.lock{overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--font-body);-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--accent)}
+html[lang="ar"] *{letter-spacing:0!important;text-transform:none!important}
+h1,h2,h3,p{margin:0}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.top :focus-visible{outline-color:var(--on-accent)}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--accent);color:var(--on-accent)}
+.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:64px;gap:6px}
+.side{display:flex;align-items:center;gap:0}
+.side.end{justify-content:flex-end}
+.icon-btn{position:relative;width:44px;height:44px;display:grid;place-items:center;background:none;border:0;border-radius:50%;color:inherit;cursor:pointer;font:700 13px var(--font-body)}
+.icon-btn:hover{background:color-mix(in srgb,currentColor 14%,transparent)}
+.icon-btn svg,.feat .ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.icon-btn.ink{color:var(--ink)}
+.count{position:absolute;top:3px;inset-inline-end:1px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--sun);color:var(--on-sun);font:700 11px/18px var(--font-body);text-align:center}
+.logo{display:grid;justify-items:center;gap:5px;color:inherit;text-decoration:none;line-height:1}
+.logo b{font:800 19px/1 var(--font-display);letter-spacing:.05em;white-space:nowrap}
+.logo small{font:600 8.5px/1 var(--font-body);letter-spacing:.3em;white-space:nowrap}
+@media (max-width:390px){.logo b{font-size:15.5px}.logo small{letter-spacing:.22em}}
+.searchbar{background:var(--surface);color:var(--ink);border-bottom:1px solid var(--line);padding-block:10px}
+.searchbar input{width:100%}
+
+/* controls */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 28px;border:0;border-radius:999px;font:700 15px var(--font-body);text-decoration:none;cursor:pointer}
+.btn-accent{background:var(--accent);color:var(--on-accent)}
+.btn-sun{background:var(--sun);color:var(--on-sun)}
+.btn-line{background:none;color:var(--ink);border:1.5px solid var(--ink)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.block{width:100%}
+input,select,textarea{width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+[aria-invalid="true"]{border-color:var(--danger)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font:600 13px var(--font-body)}
+.err{color:var(--danger);font-size:12.5px}
+
+/* hero */
+.hero{background:var(--hero);overflow:hidden}
+.hero-in{display:grid;gap:10px;padding-block:36px 28px}
+@media (min-width:820px){.hero-in{grid-template-columns:1.05fr 1fr;align-items:center;padding-block:72px}}
+.pill{justify-self:start;padding:5px 14px;border-radius:999px;background:var(--sun);color:var(--on-sun);font:800 12px var(--font-display);letter-spacing:.16em;text-transform:uppercase}
+.hero h1{font:800 clamp(2.1rem,7.4vw,3.7rem)/1.04 var(--font-display);margin:14px 0 12px;text-wrap:balance}
+html[lang="ar"] .hero h1{line-height:1.3}
+.hero p.lead{max-width:30ch;color:var(--muted);margin-bottom:22px;font-size:17px}
+.hero-art{position:relative;height:290px;width:100%;max-width:470px;margin-inline:auto}
+.disc{position:absolute;left:50%;top:50%;width:min(250px,70%);aspect-ratio:1;margin-left:calc(min(250px,70%) / -2);transform:translateY(-50%);border-radius:50%;background:var(--sun)}
+.bub{position:absolute;border:2px solid var(--accent);border-radius:50%;opacity:.7}
+.hj{position:absolute;bottom:4px;height:80%;aspect-ratio:3/5;filter:drop-shadow(0 10px 12px rgba(6,32,34,.22))}
+.hj svg{width:100%;height:100%;display:block}
+.hj1{left:14%;transform:rotate(-9deg)}
+.hj2{left:50%;height:94%;transform:translateX(-50%);z-index:2}
+.hj3{right:14%;transform:rotate(9deg)}
+
+/* ticker */
+.marquee{background:var(--accent);color:var(--on-accent);overflow:hidden;direction:ltr;white-space:nowrap}
+.track{display:flex;width:max-content;animation:slide 30s linear infinite}
+.grp{display:flex;align-items:center;gap:28px;padding-inline-end:28px;flex-shrink:0;padding-block:17px;font:700 clamp(16px,4.2vw,20px) var(--font-display)}
+.grp i{display:grid;opacity:.9}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* sections */
+.sec{padding-block:56px}
+.sec-title{text-align:center;font:700 14px var(--font-display);letter-spacing:.22em;text-transform:uppercase;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
+@media (min-width:700px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 22px}}
+@media (min-width:1000px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.card{display:flex;flex-direction:column;min-width:0}
+.tile{position:relative;aspect-ratio:4/5;display:grid;place-items:center;background:var(--tile);border-radius:6px;overflow:hidden}
+.tile svg{height:80%;width:auto;max-width:100%}
+.badge{position:absolute;top:10px;inset-inline-start:10px;padding:3px 9px;border-radius:4px;background:var(--accent);color:var(--on-accent);font:700 11px var(--font-body);letter-spacing:.08em;text-transform:uppercase}
+.badge.out{background:var(--ink);color:var(--bg)}
+.name{margin:12px 0 4px;font:600 13.5px/1.35 var(--font-display);letter-spacing:.03em;text-transform:uppercase;text-wrap:balance}
+.price{font:700 15px var(--font-body);font-variant-numeric:tabular-nums}
+.add{margin-top:10px;min-height:42px;border:1.5px solid var(--ink);border-radius:999px;background:none;color:var(--ink);font:700 13px var(--font-body);cursor:pointer}
+.add:hover:not(:disabled){background:var(--ink);color:var(--bg)}
+.add:disabled{opacity:.5;cursor:not-allowed}
+.center{text-align:center;margin-top:34px}
+
+.feats{display:grid;gap:40px;padding-block:64px}
+@media (min-width:760px){.feats{grid-template-columns:repeat(3,1fr)}}
+.feat{display:grid;justify-items:center;gap:6px;text-align:center}
+.feat .ic{width:68px;height:68px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center}
+.feat .ic svg{width:30px;height:30px}
+.feat h3{margin-top:10px;font:700 24px/1.2 var(--font-display)}
+.feat p{color:var(--muted)}
+
+.dentist{background:var(--sun);color:var(--on-sun)}
+.dent-in{display:grid;gap:24px;padding-block:52px;align-items:center}
+@media (min-width:820px){.dent-in{grid-template-columns:1fr 1fr;padding-block:72px}}
+.dentist h2{font:800 clamp(2rem,6vw,3.2rem)/1.05 var(--font-display);margin-bottom:12px;text-wrap:balance}
+html[lang="ar"] .dentist h2{line-height:1.3}
+.dentist p{max-width:44ch;font-size:17px}
+.dentist svg{width:100%;max-width:420px;height:auto;justify-self:center}
+
+.news{padding-block:64px;text-align:center}
+.news h2{font:700 14px var(--font-display);letter-spacing:.22em;text-transform:uppercase;margin-bottom:8px}
+.news p{color:var(--muted);margin-bottom:20px}
+.news form{display:grid;gap:10px;max-width:520px;margin-inline:auto}
+@media (min-width:600px){.news form{grid-template-columns:1fr auto}}
+
+.foot{border-top:1px solid var(--line);padding-block:30px;display:grid;gap:14px;justify-items:center;text-align:center;color:var(--muted);font-size:14px}
+.foot nav{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
+.foot a,.foot button{color:var(--ink);font:600 13px var(--font-body);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;background:none;border:0;cursor:pointer;padding:0}
+
+/* catalog and contact */
+.page{padding-block:44px 64px}
+.page h1{font:800 clamp(2rem,7vw,3.2rem)/1.1 var(--font-display);text-align:center;margin-bottom:26px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
+.chip{padding:8px 16px;border:1.5px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font:600 14px var(--font-body);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.none{text-align:center;color:var(--muted);padding-block:40px}
+.cgrid{display:grid;gap:14px;max-width:760px;margin-inline:auto}
+@media (min-width:700px){.cgrid{grid-template-columns:1fr 1fr}}
+.ccard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:8px;align-content:start;min-width:0}
+.ccard h3{font:700 13px var(--font-display);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.ccard .big{font:700 20px var(--font-body);overflow-wrap:anywhere}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.mini{padding:6px 14px;min-height:34px;border:1.5px solid var(--line);border-radius:999px;background:none;color:var(--ink);font:600 13px var(--font-body);cursor:pointer}
+
+/* drawers */
+.scrim{position:fixed;inset:0;z-index:70;background:rgba(6,22,24,.55);opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;z-index:71;width:min(440px,100%);display:flex;flex-direction:column;background:var(--bg);color:var(--ink);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);transform:translateX(calc(var(--d) * 100%));visibility:hidden;transition:transform .28s ease,visibility 0s .28s;box-shadow:0 0 40px rgba(0,0,0,.25)}
+.drawer.start{inset-inline-end:auto;inset-inline-start:0;transform:translateX(calc(var(--d) * -100%))}
+.drawer.open{transform:none;visibility:visible;transition:transform .28s ease}
+.dpad{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.dhead{display:flex;align-items:center;justify-content:space-between;padding-block:8px;border-bottom:1px solid var(--line);min-height:60px}
+.dtitle{font:700 20px var(--font-display)}
+.dbody{flex:1;overflow:auto;padding-block:16px;min-height:0}
+.dfoot{border-top:1px solid var(--line);background:var(--surface);padding-block:16px;display:grid;gap:10px}
+.mnav{padding-block:10px}
+.mnav a{display:block;padding:10px 0;color:var(--ink);text-decoration:none;font:500 clamp(28px,8vw,38px)/1.2 var(--font-display)}
+.mlang{margin-top:auto;padding-block:20px;display:flex;gap:10px}
+.lines{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.line{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px}
+.lt{aspect-ratio:1;background:var(--tile);border-radius:6px;display:grid;place-items:center;overflow:hidden}
+.lt svg{height:86%;width:auto}
+.ln{font:600 13px/1.35 var(--font-display);text-transform:uppercase;letter-spacing:.03em}
+.lp{font:700 14px var(--font-body);font-variant-numeric:tabular-nums;margin-top:2px}
+.qrow{display:flex;align-items:center;gap:14px;margin-top:8px}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:999px}
+.qty button{width:34px;height:34px;border:0;background:none;color:var(--ink);font:700 18px var(--font-body);cursor:pointer;border-radius:50%}
+.qty span{min-width:24px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.rm{background:none;border:0;color:var(--muted);text-decoration:underline;font:600 13px var(--font-body);cursor:pointer;padding:0}
+.ship{margin-bottom:18px;font-size:13.5px;color:var(--muted)}
+.prog{height:6px;border-radius:3px;background:var(--line);margin-top:6px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent)}
+.tot{display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.tot div{display:flex;justify-content:space-between;gap:12px}
+.tot .grand{font:800 18px var(--font-body);padding-top:6px;border-top:1px solid var(--line);margin-top:4px}
+.note{font-size:13px;color:var(--muted);text-align:center}
+.empty{display:grid;align-content:center;justify-items:center;gap:12px;text-align:center}
+.empty h3{font:700 24px var(--font-display)}
+.form{display:grid;gap:14px}
+.pay{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid var(--accent);border-radius:10px;background:var(--surface)}
+.pay input{width:18px;height:18px;padding:0;accent-color:var(--accent)}
+.sumbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:8px;font-size:14px}
+.sumbox div{display:flex;justify-content:space-between;gap:12px}
+.okdot{width:56px;height:56px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center}
+.okdot svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:90;transform:translate(-50%,16px);max-width:calc(100% - 32px);padding:10px 18px;border-radius:999px;background:var(--ink);color:var(--bg);font:600 14px var(--font-body);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  .track{animation:none}
+  .drawer,.scrim,.toast{transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* server version additions */
+.tile img.pimg{width:100%;height:100%;object-fit:cover;display:block}
+.badge.off{inset-inline-start:auto;inset-inline-end:10px;background:var(--sun);color:var(--on-sun)}
+.old{color:var(--muted);text-decoration:line-through;font-weight:500;margin-inline-end:8px}
+.lt img{width:100%;height:100%;object-fit:cover}
+.hero-photo{width:100%;height:100%;object-fit:cover;border-radius:18px;display:block}
+.dent-img{width:100%;max-width:420px;aspect-ratio:4/3;object-fit:cover;border-radius:14px;justify-self:center}
+.logo img{height:36px;width:auto;max-width:200px;display:block}
+.mnav a.small{font:600 14px var(--font-body);color:var(--muted);margin-top:18px}
+.coupon{display:flex;gap:8px;margin-bottom:6px}
+.coupon input{min-width:0}
+.coupon .btn{min-height:46px;padding:0 18px}
+.cmsg{font-size:13px;margin-bottom:14px;min-height:18px}
+.cmsg.bad{color:var(--danger)}.cmsg.ok{color:var(--accent)}
+.track-box{max-width:560px;margin-inline:auto}
+.tl{list-style:none;margin:22px 0 0;padding:0}
+.tl li{display:grid;grid-template-columns:22px 1fr;gap:12px;padding-bottom:20px;position:relative}
+.tl li::before{content:"";position:absolute;inset-inline-start:10px;top:22px;bottom:0;width:2px;background:var(--line)}
+.tl li:last-child::before{display:none}
+.tl li.done::before{background:var(--accent)}
+.tl .dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);background:var(--bg)}
+.tl li.done .dot{background:var(--accent);border-color:var(--accent)}
+.tl li.cur .dot{box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 25%,transparent)}
+.tl .lbl{font-weight:700}.tl li:not(.done) .lbl{color:var(--muted);font-weight:600}
+.tl .at{font-size:13px;color:var(--muted)}
+.tbox{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px}
+.tbox div{display:flex;justify-content:space-between;gap:12px}
+.cancelled{padding:14px;border-radius:10px;background:color-mix(in srgb,var(--danger) 14%,transparent);color:var(--danger);font-weight:700;margin-top:18px}
+</style>
+
+</head>
+<body>
+<header class="top" id="top">
+  <div class="wrap bar">
+    <div class="side">
+      <button class="icon-btn" id="btnMenu" data-tl="menu" data-ic="menu"></button>
+      <button class="icon-btn" id="btnSearch" data-tl="search" data-ic="search"></button>
+    </div>
+    <a class="logo" href="#home" dir="ltr"><b>SMILE WONDERS</b><small>{ DENTAL CARE }</small></a>
+    <div class="side end">
+      <button class="icon-btn" id="btnLang"></button>
+      <button class="icon-btn" id="btnCart" data-tl="cart"><span data-ic="bag" style="display:grid"></span><span class="count" id="count" hidden>0</span></button>
+    </div>
+  </div>
+  <div class="searchbar" id="searchbar" hidden>
+    <div class="wrap"><input id="q" type="search" data-tp="searchph" autocomplete="off"></div>
+  </div>
+</header>
+
+<div class="view" id="v-home">
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div>
+        <span class="pill" data-t="eyebrow"></span>
+        <h1 data-t="h1"></h1>
+        <p class="lead" data-t="hsub"></p>
+        <a class="btn btn-accent" href="#catalog" data-t="shop"></a>
+      </div>
+      <div class="hero-art" id="heroArt" aria-hidden="true"></div>
+    </div>
+  </section>
+  <div class="marquee" id="marquee"><div class="track" id="track"></div></div>
+
+  <section class="sec wrap">
+    <h2 class="sec-title" data-t="best"></h2>
+    <div class="grid" id="gridBest"></div>
+    <div class="center"><a class="btn btn-line" href="#catalog" data-t="viewall"></a></div>
+  </section>
+
+  <div class="wrap feats">
+    <div class="feat"><div class="ic" data-ic="flask"></div><h3 data-t="f1t"></h3><p data-t="f1s"></p></div>
+    <div class="feat"><div class="ic" data-ic="breeze"></div><h3 data-t="f2t"></h3><p data-t="f2s"></p></div>
+    <div class="feat"><div class="ic" data-ic="shield"></div><h3 data-t="f3t"></h3><p data-t="f3s"></p></div>
+  </div>
+
+  <section class="dentist">
+    <div class="wrap dent-in">
+      <div><h2 data-t="dent_t"></h2><p data-t="dent_p"></p></div>
+      <img id="dentImg" class="dent-img" alt="" hidden>
+      <svg id="dentSvg" viewBox="0 0 320 170" aria-hidden="true">
+        <defs><clipPath id="mouth"><path d="M24 44Q160 150 296 44Q160 92 24 44Z"/></clipPath></defs>
+        <path d="M24 44Q160 150 296 44Q160 92 24 44Z" fill="#fff"/>
+        <g clip-path="url(#mouth)" stroke="#C5D5D3" stroke-width="2"><path d="M64 30V140M104 30V140M144 30V140M184 30V140M224 30V140M264 30V140"/></g>
+        <path d="M24 44Q160 150 296 44Q160 92 24 44Z" fill="none" stroke="#D23C5A" stroke-width="9" stroke-linejoin="round"/>
+        <g fill="currentColor" opacity=".85"><path transform="translate(40 130)" d="M0-14L3.5-3.5 14 0 3.5 3.5 0 14-3.5 3.5-14 0-3.5-3.5Z"/><path transform="translate(282 22)" d="M0-10L2.5-2.5 10 0 2.5 2.5 0 10-2.5 2.5-10 0-2.5-2.5Z"/><path transform="translate(300 120)" d="M0-7L1.8-1.8 7 0 1.8 1.8 0 7-1.8 1.8-7 0-1.8-1.8Z"/></g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="news wrap">
+    <h2 data-t="news_t"></h2>
+    <p data-t="news_p"></p>
+    <form id="newsForm" novalidate>
+      <input id="email" type="email" data-tp="email" autocomplete="email" aria-label="Email">
+      <button class="btn btn-accent" type="submit" data-t="subscribe"></button>
+    </form>
+  </section>
+</div>
+
+<div class="view" id="v-catalog" hidden>
+  <div class="wrap page">
+    <h1 data-t="products"></h1>
+    <div class="chips" id="chips" role="group"></div>
+    <div class="grid" id="gridAll"></div>
+    <p class="none" id="noneMsg" hidden data-t="none"></p>
+  </div>
+</div>
+
+<div class="view" id="v-contact" hidden>
+  <div class="wrap page">
+    <h1 data-t="nav_contact"></h1>
+    <div class="cgrid">
+      <div class="ccard">
+        <h3>WhatsApp</h3>
+        <p data-t="ct_wa_p"></p>
+        <a class="btn btn-accent" id="waLink" target="_blank" rel="noopener" data-t="ct_wa"></a>
+      </div>
+      <div class="ccard">
+        <h3 data-t="ct_phone"></h3>
+        <div class="big" dir="ltr" id="phoneTxt"></div>
+        <div class="row"><button class="mini" id="copyPhone" data-t="copy"></button></div>
+      </div>
+      <div class="ccard"><h3 data-t="ct_hours"></h3><p class="big" id="ctHours"></p></div>
+      <div class="ccard"><h3 data-t="ct_addr"></h3><p class="big" id="ctAddr"></p></div>
+      <div class="ccard" style="grid-column:1/-1"><h3 data-t="ct_deliv"></h3><p id="ctDeliv"></p></div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-track" hidden>
+  <div class="wrap page">
+    <h1 data-t="track_t"></h1>
+    <div class="track-box">
+      <p class="none" style="padding-block:0 18px" data-t="track_p"></p>
+      <form class="form" id="trackForm" novalidate>
+        <div class="field"><label for="tid" data-t="order_no"></label><input id="tid" type="text" dir="ltr" autocomplete="off" placeholder="SW-123456"></div>
+        <div class="field"><label for="tph" data-t="phone"></label><input id="tph" type="tel" inputmode="tel" dir="ltr" autocomplete="tel"></div>
+        <button class="btn btn-accent block" type="submit" data-t="track_btn"></button>
+      </form>
+      <div id="trackOut" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="wrap foot">
+  <nav>
+    <a href="#catalog" data-t="shop_l"></a>
+    <button id="footSearch" data-t="search_l"></button>
+    <a href="#contact" data-t="nav_contact"></a>
+    <a href="#track" data-t="nav_track"></a>
+  </nav>
+  <span data-t="rights"></span>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer start" id="menu" role="dialog" aria-modal="true" data-tl="menu">
+  <div class="dhead dpad"><span></span><button class="icon-btn ink" data-act="close" data-tl="close" data-ic="close"></button></div>
+  <nav class="mnav dpad">
+    <a href="#home" data-act="nav" data-t="nav_home"></a>
+    <a href="#catalog" data-act="nav" data-t="nav_catalog"></a>
+    <a href="#contact" data-act="nav" data-t="nav_contact"></a>
+    <a href="#track" data-act="nav" data-t="nav_track"></a>
+    <a class="small" href="/admin" data-t="nav_admin"></a>
+  </nav>
+  <div class="mlang dpad">
+    <button class="chip" data-lang="ar">العربية</button>
+    <button class="chip" data-lang="en">English</button>
+  </div>
+</aside>
+
+<aside class="drawer" id="cartDrawer" role="dialog" aria-modal="true" data-tl="cart">
+  <div id="cartInner" style="display:flex;flex-direction:column;flex:1;min-height:0"></div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>

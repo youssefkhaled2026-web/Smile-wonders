@@ -1,0 +1,10 @@
+{
+  "name": "smile-wonders-store",
+  "version": "1.0.0",
+  "description": "Smile Wonders Dental Care store with admin panel",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=16" },
+  "license": "UNLICENSED",
+  "private": true
+}
